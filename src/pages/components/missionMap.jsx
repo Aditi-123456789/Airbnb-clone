@@ -54,7 +54,7 @@ const SetBoundsRectangles = ({ setInnerMap, setDisplayHotels, date, priceRange }
     const hotels = hotelData.filter((hotel) => {
       const inBounds = map.getBounds().contains(hotel.location);
       const inDateRange = isDateInRange(hotel.availabilitydates, date);
-      const inPriceRange = typeof priceRange === 'number' ? hotel.price <= priceRange : true;
+      const inPriceRange = !priceRange || (hotel.price <= priceRange);
       return inBounds && inDateRange && inPriceRange;
     });
     setInnerMap(hotels);
@@ -66,11 +66,14 @@ const SetBoundsRectangles = ({ setInnerMap, setDisplayHotels, date, priceRange }
   }, [map, date, priceRange]);
 
   useMapEvents({
-    moveend: fetchHotelsWithinBounds,
+    move: () => {
+      fetchHotelsWithinBounds();
+    }
   });
 
   return null;
 };
+
 
 const UpdateMapCenter = ({ location }) => {
   const map = useMap();
@@ -94,12 +97,7 @@ const MissionMap = ({ setDisplayHotels, location, date, priceRange }) => {
           attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.osm.org/{z}/{x}/{y}.png"
         />
-        <SetBoundsRectangles 
-          setInnerMap={setInnerMap} 
-          setDisplayHotels={setDisplayHotels} 
-          date={date} 
-          priceRange={priceRange} 
-        />
+        <SetBoundsRectangles setInnerMap={setInnerMap} setDisplayHotels={setDisplayHotels} date={date} priceRange={priceRange} />
         <HotelMarkers innerMap={innerMap} />
         <UpdateMapCenter location={location} />
       </MapContainer>

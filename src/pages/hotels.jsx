@@ -5,7 +5,7 @@ import Dashboard from './components/dashboard'
 const Hotels = () => {
   const [latlon,setLatLon] = useState()
   const [date,setDates] = useState({startDate:'',endDate:''});
-  const [priceRange,setPriceRange] = useState(200000);
+  const [priceRange,setPriceRange] = useState(0);
 
   const [location, setLocation] = useState({
     latLon: [20.5937, 78.9629], 

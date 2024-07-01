@@ -117,7 +117,7 @@ const Header = ({setPriceRange,setDates,setLocation,setLatLon,date}) => {
           <div className='flex flex-row gap-4'>
             <div className='border-gray-900 p-2 border rounded-lg'>
             <label className='mr-4' for="Adults">Price Range :</label>
-            <input type='number' defaultValue={1000} id='Adults' onChange={(e)=>setPriceRange({endDate: e.target.value})}/>
+            <input type='number' defaultValue={1000} id='Adults' onChange={(e)=>setPriceRange(e.target.value)}/>
             </div>
           </div>
         </div>

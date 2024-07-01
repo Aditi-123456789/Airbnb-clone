@@ -18,7 +18,7 @@ import hotel13 from '../../utils/hotel13.webp';
 import Card from './card.jsx';
 import MissionMap from './missionMap.jsx';
 
-const Dashboard = ({ location, setLocation }) => {
+const Dashboard = ({ location, setLocation, date, priceRange }) => {
   const hotelImages = [
     hotel0, hotel1, hotel2, hotel3, hotel4, hotel5, hotel6, hotel7, hotel8,
     hotel9, hotel10, hotel11, hotel12, hotel13
@@ -37,12 +37,15 @@ const Dashboard = ({ location, setLocation }) => {
               price={hotel.price}
               image={hotelImages[hotel.id % hotelImages.length]}
               location={hotel.District} 
+              pool = {hotel.pool}
+              rooms = {hotel.rooms}
+              garden = {hotel.garder}
             />
           ))}
         </div>
       </div>
       <div className='sm:sticky top-0 sm:h-[100vh] h-[40vh] sm:w-1/3 w-full block'>
-        <MissionMap setDisplayHotels={setDisplayHotels} location={location} setLocation={setLocation} />
+        <MissionMap setDisplayHotels={setDisplayHotels} location={location} date={date} priceRange={priceRange} />
       </div>
     </div>
   );
